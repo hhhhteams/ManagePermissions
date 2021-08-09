@@ -1,0 +1,274 @@
+﻿<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/ManagePermissions/ManagePermissions.js?updated=03-04-2018"></script>
+<style type="text/css">
+</style>
+<style>
+    #pageTitle a {
+        display: none !important;
+    }
+
+    #contentRow {
+        padding-top: 0px !important;
+        margin-top: -15px;
+    }
+</style>
+<div ng-controller="ManagePermissionsController" ng-cloak>
+    <div>
+        <h1 class="blue-clr">Permission-Management </h1>
+    </div>
+    <div class="panel panel-default mt0">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Manage Permissions - Users
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" data-content="" class="pull-right" title="" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams Members')" tileName="Users-Member-EDA">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/Members.png">
+                    </a>
+                </div>
+
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="pull-right" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams Visitors')" tileName="Users-Visitor-EDA" title="" data-content="">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/Visitors.png">
+                    </a>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Manage Permissions - Teams
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" data-content="" class="pull-right" title="" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams Team')" tileName="Team">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/Team.png">
+                    </a>
+                </div>
+
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="pull-right" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams Support')" tileName="Users-Visitor-EDA" title="Support" data-content="">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/Support.png">
+                    </a>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Manage Permissions - Admins
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="pull-right" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams Owners')" tileName="Admins-Owner" title="" data-content="">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/Owners.png">
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="pull-right" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams SP-Admin')" tileName="SP-Admin" title="" data-content="">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/SP-Admin.png">
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="pull-right" ng-click="DisplaySiteOwners('HHHHTeams', 'HHHHTeams SP-Manager')" tileName="SP-Manager" title="" data-content="">
+                        <img class="imgStyle" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/Tiles/Permission/SP-Manager.png">
+                    </a>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div id="ManageSiteOwners" class="modal fade in hnav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+   <!-- // <div id="ManageSiteOwners" class="modal fade in disnone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"> -->
+        <div ng-show="IsLoadSiteOwner">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="panel-title">
+                        <button type="button" class="close minwid-10" data-dismiss="modal" ng-click="closeManageSitePopup()">&times;</button>
+                        <h3 class="mb-0">
+                            Manage Permissions
+                    
+                        </h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="modal-body">
+                        <a href="javascript:void(0)" class="pull-right btn btn-link" title="Manage Permissions" ng-click="AddSiteOwner()">
+                            <span class="glyphicon glyphicon-plus"></span> Add User
+                        </a>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-6 padb-10">
+                                    <select id="selGroups" class="form-control height-30" style="padding:0 5px;" name="selGroups" ng-change="BindUsersByGroup()" ng-options="item as item.Title for item in SPGroups track by item.Id" ng-model="SearchGroup"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" maxlength="50" class="form-control height-30" placeholder="Search Users" ng-model="searchText">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content bdrbox">
+                            <!-- Start - Display Site Owners  form-horizontal-->
+                  
+                            <div id="table-wrapper" class="section-event " style="padding-top: 40px!important;">
+                                <div id="table-scroll">
+                                    <div ng-show="(UsersArrByGroup =='undefined' || UsersArrByGroup =='null' || UsersArrByGroup.length==0  || (UsersArrByGroup|filter:searchText).length==0)&&Flag==true">
+                                        <div role="alert" class="alert alert-info text-center">
+                                            <strong>Currently, there is no user in {{SearchGroup.Title}}.</strong>
+                                        </div>
+                                    </div>
+                                    <div ng-show="Flag==false">
+                                        <div role="alert" class="alert alert-info text-center">
+                                            <strong>
+                                                you do not have the necessary rights to access this section
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover" ng-hide="UsersArrByGroup.length==0  || (UsersArrByGroup|filter:searchText).length==0">
+                                        <thead>
+                                            <tr>
+                                                <!--<th width="2%"></th>-->
+                                                <th class="hreflink" ng-click="orderBy='title'; reverse=!reverse;">
+                                                    <div>
+                                                    <span class="text">Title</span>
+                                                    <span ng-if="reverse&&orderBy=='title'" class="ms-sortarrowdown-iconouter"><img class="ms-sortarrowdown-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt=""></span>
+                                                    <span ng-if="!reverse&&orderBy=='title'" class="ms-sortarrowup-iconouter"><img class="ms-sortarrowup-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt=""></span>
+                                                    <span ng-hide="reverse==true||reverse==false" class="ms-sortarrowup-iconouter"><img class="ms-sortarrowup-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt=""></span>
+                                                </div>
+                                                </th>
+                                                <th class="hreflink" ng-click="orderBy='email'; reverse=!reverse;">
+                                                    <div class="text">Email</div>
+                                                    <div ng-if="reverse&&orderBy=='email'" class="ms-sortarrowdown-iconouter"><img class="ms-sortarrowdown-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt=""></div>
+                                                    <div ng-if="!reverse&&orderBy=='email'" class="ms-sortarrowup-iconouter"><img class="ms-sortarrowup-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt=""></div>
+                                                </th>
+                                                <th><div class="text"><div aria-hidden="true" class=""></div></div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-ng-repeat="dtl in UsersArrByGroup | filter: searchText | orderBy:orderBy:reverse">
+                                                <td><span>{{dtl.title}}</span></td>
+                                                <td>{{dtl.email}}</td>
+                                                <td>
+                                                    <a title="Delete {{::SearchGroup.Title}}" href="javascript:void(0)" title="Delete {{::GlobalSettings.FormTitle}}">
+                                                        <img ng-if="isOwner==true" src="/_layouts/images/delete.gif" ng-click="RemoveSiteOwner(dtl.id)">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- End  - Display Site Owners -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <a clas="hreflink" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/people.aspx?MembershipGroupId=7" target="_blank" ng-show="Flag==false">Request admin rights for this group</a>
+                        <button type="button" class="btn btn-primary" ng-click="closeManageSitePopup()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <div ng-if="IsAddSiteOwner" id="PnlAddSiteOwner" class="ng-scope">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close minwid-10" ng-click="CancelSiteOwner()">×</button>
+                        <h4 class="modal-title ng-binding">Add User in {{SearchGroup.Title}}</h4>
+                    </div>
+                    <ng-form name="siteOwnerForm" novalidate="" role="form">
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-sm-12 form-group pdl4 news_upload">
+                                    <div class="col-sm-1 no-padding">
+                                        User<span class="required">*</span>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <div data-ng-disabled="false" ui-people data-ng-model="Item.siteOwnerUser" pp-is-multiuser="true" pp-account-type="User,DL" id="siteOwnerUser" class="form-control PeopleHeight"></div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="Contacts.length > 0">
+                                <div id="table-wrapper">
+                                    <div id="table-scroll">
+                                        <table class="table table-hover" cellspacing="0" width="100%">
+                                            <tbody>
+                                                <tr ng-repeat="item in Contacts">
+                                                    <td width="15px;">
+                                                        <input name="contacts" type="radio" ng-click="selectContact(item)" />
+                                                    </td>
+                                                    <td width="25px;">
+                                                        <img class="wid22" ng-if="!item.Attachments" src="https://www.shareweb.ch/site/EI/Style%20Library/Images/ContactPicture.jpg" />
+                                                        <img class="wid22" ng-if="item.Attachments" ng-src="https://www.shareweb.ch/site/EI//Lists/contacts/Attachments/{{item.Id}}/ContactPicture.jpg" />
+                                                    </td>
+                                                    <td>
+                                                        <a ng-href="/site/EI/memberarea/Pages/member-profile.aspx?k={{item.FirstName}} {{item.Title}}" target="_blank">
+                                                            <span ng-if="item.Suffix != null && item.Suffix.length>0" class="hreflink">{{item.FirstName}} {{item.Title}} ({{item.Suffix}})</span>
+                                                            <span ng-if="item.Suffix==null" class="hreflink">{{item.FirstName}} {{item.Title}}</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer pdl4">
+                            <button type="button" id="btnSubmitUser" name="btnSubmitUser" class="btn btn-primary" data-dismiss="modal" ng-disabled="siteOwnerForm.$error.required || Item.siteOwnerUser.Id==0" ng-click="InsertSiteOwner()" title="Save changes &amp; exit" disabled="disabled">Save</button>
+                            <button type="button" class="btn btn-default" ng-click="CancelSiteOwner()" title="Discard unsaved changes &amp; exit">Cancel</button>
+                        </div>
+                    </ng-form>
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+    <div class="pull-right">
+        <a href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/user.aspx" target="_blank">OOTB Permissions Management</a>
+    </div>
+</div>
+<style type="text/css">
+    #siteowner * [class^="col-"] img {
+        max-width: 100%;
+    }
+
+    @media (max-width: 767px) {
+        #siteowner .visible-xs {
+            display: inline-block !important;
+        }
+
+        #siteowner .block {
+            display: block !important;
+            width: 100%;
+            height: 1px !important;
+        }
+    }
+</style>
+

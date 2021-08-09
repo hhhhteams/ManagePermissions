@@ -1,0 +1,288 @@
+﻿<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/SP.UI.Controls.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/1033/strings.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clienttemplates.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clientforms.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/clientpeoplepicker.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/autofill.js"></script>
+<script type="text/ecmascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/_layouts/15/sp.RequestExecutor.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/ManagePermissions/ManagePermissionTool.js"></script>
+
+<style type="text/css">
+    .panel-body {
+        padding: 15px !important;
+    }
+
+    .modal-title {
+        margin-bottom: 0;
+        line-height: 1.5;
+        width: 100%;
+    }
+
+    .icontype.display_hide.padLR {
+        padding: 0px 0px 0px 0px;
+    }
+
+    .alignmentitle {
+        display: inline-block;
+        padding-top: 10px;
+    }
+
+    .arrow_up.glyphicon_active {
+        margin-top: -3px;
+        right: auto !important;
+    }
+
+    .arrow_up {
+        margin-top: 4px !important;
+        margin-left: 3px;
+    }
+
+    .glyphicon_active.glyphicon-chevron-down, .glyphicon.glyphicon-chevron-down {
+        top: 22px !important;
+        margin-left: 3px;
+    }
+
+    .mt-4 {
+        margin-top: 4px !important;
+    }
+
+    .modal-dialog {
+        pointer-events: auto;
+    }
+
+    .btn {
+        font-size: 14px !important;
+    }
+
+    .componet-portfoliblue label {
+        text-transform: none !important;
+    }
+</style>
+<div ng-controller="ManagePermissionsController" ng-cloak class="tiles_creative add-td component componet-portfoliblue">
+
+    <div class="row">
+        <div class="col-12 padL-0 PadR0 mt-10 mb-10">
+            <div class="col-sm-3">
+                <label class="d-block">
+                    Showing {{SitesLength}} of
+                    {{CopySitesLength}} Sites
+                </label>
+                <br><label class="d-block">
+                    Showing {{GroupsLength}} of
+                    {{CopyGroupsLength}} Groups
+                </label>
+                <br><label class="d-block">
+                    Showing {{MembersLength}} of
+                    {{CopyMembersLength}} Members
+                </label>
+            </div>
+            <span class="pull-right">
+                <button type="button" class="btn btn-sm btn-primary"
+                        ng-click="AddGroupmember()" title=" Add Groups/Members" ng-disabled="(SelectedItem.length==0 ||SelectedItem.length>1)">
+                    Add
+                </button>
+            </span>
+        </div>
+
+    </div>
+    <div>
+        <div class="mb-10">
+            <div id="portfolio" class="section-event pt-0">
+                <ul class="table padL-0">
+                    <li class="for-lis">
+                        <div style="width: 1%;">
+                            <div style="width:85%;">
+                                <a class="hreflink" ng-show="expand_collapse"
+                                   ng-click="filterExpanded(ComponetsData)"
+                                   title="Tap to expand the childs">
+                                    <img style="width: 10px;"
+                                         ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                </a>
+                                <a class="hreflink" ng-show="!expand_collapse"
+                                   ng-click="filterCollapsed(ComponetsData)"
+                                   title="Tap to Shrink the childs">
+                                    <img style="width: 10px;"
+                                         ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/list-icon.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div style="width: 3%;" class="padLR">
+                            <!--<div style="width: 80%; ">
+                                <span class="no-padding {{isGreyChecked==true?'inputboxenble':''}}{{isDarkChecked==true?'inputboxdisble':''}}">
+                                    <input type="checkbox" ng-click="SelectAllDeselect();" ng-model="SelectDeselect">
+                                </span>
+                            </div>-->
+                        </div>
+                        <div style="width:33%;">
+                            <div style="width:100%;" class="headcontainer">
+                                <input type="text" placeholder="Title" id="myTitle" style="width:80%;" class="searchbox_height"
+                                       ng-model="SearchComponent.Title" autocomplete="off">
+                                <span class="searchclear" ng-show="SearchComponent.Title.length>0"
+                                      ng-click="clearSearchBox('SearchComponent','Title')">X</span>
+                                <span class="{{orderBy.orderComponent=='Title'&&!reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                      ng-click="sortBy('orderComponent','Title', false)"></span>
+                                <span class="{{orderBy.orderComponent=='Title'&&reverse.orderComponent?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                      ng-click="sortBy('orderComponent','Title', true)"></span>
+                                <!--<span>
+                                    <img class="wid22" style="margin-left: 14px;"
+                                         ng-src="{{siteUrl}}/PublishingImages/Icons/siteIcons/searchIcon.png"
+                                         ng-click="TitleSearch();">
+                                </span>-->
+                            </div>
+                        </div>
+                        <div style="width:3%;" class="padLR">
+                        </div>
+                    </li>
+                    <div class="wrapper table-scoll-overflow" id="portfolio1">
+                        <li ng-show="item.flag==true"
+                            class="for-lis project_active tdrows serviceColor_Active"
+                            ng-repeat-start="item in filterComponent=(ComponetsData)"
+                            lvl-drop-target="true" on-drop="dropped(dragSrc,item)">
+                            <div style="width:1%;" class="">
+                                <a class="hreflink" ng-show="item.childs.length>0&&!item.expanded"
+                                   ng-click="item.expanded=true" title="Expand/Collapse">
+                                    <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                </a>
+                                <a class="hreflink" ng-show="item.childs.length>0&&item.expanded"
+                                   ng-click="item.expanded=false" title="Expand/Collapse">
+                                    <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/list-icon.png">
+                                </a>
+                            </div>
+                            <div style="width:3%;" class="padLR">
+                                <div>
+                                    <!--<input type="checkbox" ng-click="selectGroupOrMember(item,item.select,item,'Group');"
+                                           ng-model="item.select">-->
+                                </div>
+                            </div>
+                            <div style="width:33%;">
+
+                                <span ng-bind-html="item.Title | trustedHTML">
+                                </span>
+                            </div>
+                            <div style="width:3%;" class="padLR">
+                            </div>
+                        </li>
+                        <li ng-if="item.expanded" class="active" ng-repeat-end>
+                            <ul class="table padL-0 mb-0">
+                                <li ng-show="item.childs.length >0 && child.flag ==true"
+                                    ng-repeat-start="child in filterComponent=(item.childs)" lvl-drop-target="true"
+                                    on-drop="dropped(dragSrc,child)"
+                                    class="for-c0l for-lis project_actives tdrows serviceColor_Active">
+                                    <div style="width:1%;" class="">
+                                        <a class="hreflink" ng-show="child.childs.length>0&&!child.expanded"
+                                           ng-click="child.expanded=true" title="Expand/Collapse">
+                                            <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/right-list-icon.png">
+
+                                        </a>
+                                        <a class="hreflink" ng-show="child.childs.length>0&&child.expanded"
+                                           ng-click="child.expanded=false" title="Expand/Collapse">
+                                            <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/list-icon.png">
+                                        </a>
+                                    </div>
+                                    <div style="width:3%;" class="padLR">
+                                        <span>
+                                            <input type="checkbox"
+                                                   ng-click="selectGroupOrMember(child,child.select,item,'Member');"
+                                                   ng-model="child.select">
+                                        </span>
+                                    </div>
+                                    <div style="width:33%;" class="">
+                                        <span ng-bind-html="child.Title | trustedHTML">
+                                        </span>
+
+                                    </div>
+                                    <div style="width:3%;" class="padLR">
+                                    </div>
+                                </li>
+                                <li ng-show="child.expanded " class=" active" ng-repeat-end>
+                                    <ul class="table padL-0 mb0">
+                                        <li ng-show="subchild.flag==true"
+                                            ng-repeat="subchild in filterComponent=(child.childs)"
+                                            lvl-drop-target="true" on-drop="dropped(dragSrc,subchild)"
+                                            class="for-lis for-c02 project_activess tdrows serviceColor_Active">
+                                            <div style="width:1%;" class="">
+                                                <a class="hreflink"
+                                                   ng-show="subchild.childs.length>0&&!subchild.expanded"
+                                                   ng-click="subchild.expanded=true"
+                                                   title="Expand/Collapse">
+                                                    <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/right-list-icon.png">
+                                                </a>
+                                                <a class="hreflink"
+                                                   ng-show="subchild.childs.length>0&&subchild.expanded"
+                                                   ng-click="subchild.expanded=false"
+                                                   title="Expand/Collapse">
+                                                    <img ng-src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/24/list-icon.png">
+                                                </a>
+                                            </div>
+                                            <div style="width:3%;" class="padLR">
+                                                <!--<span class="">
+                                                    <input type="checkbox"
+                                                           ng-click="selectGroupOrMember(subchild,subchild.select,item,'Member');"
+                                                           ng-model="subchild.select">
+                                                </span>-->
+                                            </div>
+                                            <div style="width:95%;" class="">
+
+                                                <span ng-bind-html="subchild.Title | trustedHTML">
+                                                </span>
+
+                                            </div>
+                                            <div style="width:3%;" class="padLR">
+                                                <img ng-if="isOwner==true" src="/_layouts/images/delete.gif" ng-click="RemoveSiteOwner(subchild.Id,child,item)" data-themekey="#">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-show="isAddUser" id="AddSitegroupMember" class="ng-scope">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close minwid-10" ng-click="CancelSiteOwner()">×</button>
+                    <h4 ng-show="CreationType=='Member'" class="modal-title ng-binding">Add User in {{SelectedItem[0].Title}}</h4>
+                    <h4 ng-show="CreationType=='Group'" class="modal-title ng-binding">Add Group in {{SelectedItem[0].Title}} Site</h4>
+                </div>
+                <ng-form name="siteOwnerForm" novalidate="" role="form">
+                    <div class="tab-content">
+                        <div class="row">
+                            <div class="col-sm-12 form-group pdl4 news_upload">
+                                <div ng-show="CreationType=='Member'" class="col-sm-1 no-padding">
+                                    User<span class="required">*</span>
+                                </div>
+                                <div ng-show="CreationType=='Group'" class="col-sm-1 no-padding">
+                                    Group<span class="required">*</span>
+                                </div>
+                                <div ng-show="CreationType=='Member'" class="col-sm-11">
+                                    <div data-ng-disabled="false" ui-people data-ng-model="Item.siteOwnerUser" pp-is-multiuser="true" pp-account-type="User,DL" id="siteOwnerUser" class="form-control PeopleHeight"></div>
+                                </div>
+                                <div ng-show="CreationType=='Group'" class="col-sm-11">
+                                    <input type="text" placeholder="Title" id="myTitle" style="width: 450px !important;" class="searchbox_height"
+                                           ng-model="GroupTitle" autocomplete="off">
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer pdl4">
+                        <button type="button" ng-show="CreationType=='Member'" id="btnSubmitUser" name="btnSubmitUser" class="btn btn-primary" data-dismiss="modal" ng-disabled="siteOwnerForm.$error.required || Item.siteOwnerUser.Id==0" ng-click="InsertSiteOwner()" title="Save changes &amp; exit" disabled="disabled">Save</button>
+                        <button type="button" ng-show="CreationType=='Group'" id="btnSubmitUser" name="btnSubmitUser" class="btn btn-primary" data-dismiss="modal" ng-disabled="siteOwnerForm.$error.required || Item.siteOwnerUser.Id==0" ng-click="CreateSiteGroup()" title="Save changes &amp; exit" disabled="disabled">Save</button>
+                        <button type="button" class="btn btn-default" ng-click="CancelSiteOwner()" title="Discard unsaved changes &amp; exit">Cancel</button>
+                    </div>
+                </ng-form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
